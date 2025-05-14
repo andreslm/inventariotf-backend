@@ -28,7 +28,7 @@ router.get('/seriales', checkAuth, async (req, res) => {
 router.get('/productos', checkAuth, async (req, res) => {
   try {
     const result = await pool.query(`
-      SELECT nombre, tipo_unidad, cantidad, fecha_ingreso, observaciones
+      SELECT nombre, tipo_unidad, cantidad, stock_minimo, observaciones
       FROM productos
       ORDER BY nombre
     `);
