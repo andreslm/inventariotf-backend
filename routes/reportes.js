@@ -11,15 +11,15 @@ router.get('/seriales', checkAuth, async (req, res) => {
       SELECT 
         ps.serial, 
         ps.entregado,
-        p.nombre AS producto
-		t.nombre AS tecnico,
-        o.id AS orden_id						
+        p.nombre AS producto,
+        t.nombre AS tecnico,
+        o.id AS orden_id
       FROM producto_seriales ps
       JOIN productos p ON ps.producto_id = p.id
-	  LEFT JOIN orden_detalle_seriales ods ON ps.id = ods.serial_id
+      LEFT JOIN orden_detalle_seriales ods ON ps.id = ods.serial_id
       LEFT JOIN orden_detalle od ON ods.orden_detalle_id = od.id
       LEFT JOIN ordenes o ON od.orden_id = o.id
-      LEFT JOIN tecnicos t ON o.tecnico = t.nombre										  
+      LEFT JOIN tecnicos t ON o.tecnico = t.nombre
       WHERE LOWER(p.nombre) LIKE '%onu%' OR LOWER(p.nombre) LIKE '%repetidor%'
       ORDER BY p.nombre, ps.serial
     `);
